@@ -7,7 +7,7 @@
 </head>
 <body>
     <center>
-    <img src="IMG_2111.JPG" alt="pp" class="mt-5" style="width:200px; height: 200px;">
+    <img src="/assets/IMG_2111.png" alt="pp" class="mt-5" style="width:200px; height: 200px; border-radius: 50%;"><br><br>
         <div class="card" style="width: 18rem;">
           <ul class="list-group list-group-flush">
             <li class="list-group-item"><?= $nama ?></li>
