@@ -8,6 +8,7 @@
 <body>
     <center>
     <img src="<?=base_url("/assets/img/IMG_2111.jpg")?>" alt="" class="mt-5" style="width:200px; height: 200px; border-radius: 50%;"><br><br>
+
         <div class="card" style="width: 18rem;">
           <ul class="list-group list-group-flush">
             <li class="list-group-item"><?= $nama ?></li>
