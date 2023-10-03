@@ -6,7 +6,6 @@ use CodeIgniter\Model;
 
 class UserModel extends Model
 {
-    
     protected $DBGroup          = 'default';
     protected $table            = 'user';
     protected $primaryKey       = 'id';
@@ -15,9 +14,6 @@ class UserModel extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = ['nama', 'npm', 'id_kelas'];
-    public function saveUser ($data){
-        $this->insert($data);
-    }
 
     // Dates
     protected $useTimestamps = true;
@@ -43,4 +39,12 @@ class UserModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
+    public function saveUser($data)
+    {
+        $this->insert($data);
+    }
+    public function getUser()
+    {
+        return $this->join('kelas', 'kelas.id=user.id_kelas')->findAll();
+    }
 }
