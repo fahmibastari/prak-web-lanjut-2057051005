@@ -59,6 +59,37 @@ class UserController extends BaseController
             'kelas' => $kelas,
             'validation' => \Config\Services::validation()
         ];
+    }
+    public function create()
+    {
+    //     $kelas = [
+    //     [
+    //         'id' => 1,
+    //         'nama_kelas' => 'A'
+    //     ],
+    //     [
+    //         'id' => 2,
+    //         'nama_kelas' => 'B'
+    //     ],
+    //     [
+    //         'id' => 3,
+    //         'nama_kelas' => 'C'
+    //     ],
+    //     [
+    //         'id' => 4,
+    //         'nama_kelas' => 'D'
+    //     ],
+    // ];
+    
+
+    $kelas = $this->kelasModel->getKelas();
+
+    $data = [
+        'title' => 'create user',
+        'kelas' => $kelas,
+        'validation' => \Config\Services::validation()
+
+    ];
         return view('create_user', $data);
     }
     public function show($id)

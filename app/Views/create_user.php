@@ -9,6 +9,7 @@
       <?php if (session('validation') && session('validation')->hasError('nama')) : ?>
         <div class="invalid-feedback">
           <?= session('validation')->getError('nama'); ?>
+
         </div>
       <?php endif; ?>
     </div>
@@ -43,4 +44,22 @@
     <button class="btn btn-primary w-100 py-2 mt-3" type="submit">DAFTAR</button>
   </form>
 </main>
+        <div class="form-group">
+        <select type="text" name="kelas" placeholder="Kelas">
+            <?php
+            foreach ($kelas as $item) {
+            ?>
+                <option value="<?= $item['id'] ?>">
+                    <?= $item['nama_kelas'] ?>
+                </option>
+            <?php
+            }
+            ?>
+        </select>
+        </div>
+        <div class="form-group">
+        <input type="submit" value="CREATE">
+        </div>
+    </form>
+</center>
 <?= $this->endSection('content') ?>
