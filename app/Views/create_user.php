@@ -1,8 +1,8 @@
 <?= $this->extend('layouts/app') ?>
 <?= $this->section('content') ?>
 <main class="form-signin w-100 m-auto">
-  <form method="POST" action="<?= base_url('/user/store') ?>">
-    <h1 class="h3 mt-5 mb-3 fw-normal">DAFTAR AKUN</h1>
+  <form method="POST" action="<?= base_url('/user/store') ?>" enctype="multipart/form-data">
+    <h1 class="h3 mt-5 mb-3 fw-normal">Daftar Akun</h1>
     <div class="form-floating">
       <input type="text" class="form-control mt-2 <?= session('validation') && session('validation')->hasError('nama') ? 'is-invalid' : '' ?>" id="floatingName" placeholder="Nama" name="nama" value="<?= old('nama') ?>">
       <label for="floatingName">Nama</label>
@@ -31,6 +31,12 @@
           <option value="<?= $item['id'] ?>"><?= $item['nama_kelas'] ?></option>
         <?php } ?>
       </select>
+    </div>
+    <div class="form-floating">
+      <div class="">
+        <label for="formFileSm" class="form-label">Foto</label>
+        <input class="form-control form-control-sm" id="formFileSm" type="file" name="foto">
+      </div>
     </div>
 
 
