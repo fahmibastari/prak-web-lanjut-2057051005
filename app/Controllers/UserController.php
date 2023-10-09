@@ -2,16 +2,17 @@
 
 namespace App\Controllers;
 
+use App\Controllers\BaseController;
 use App\Models\KelasModel;
 use App\Models\UserModel;
-use App\Controllers\BaseController;
 
 class UserController extends BaseController
 {
     public $userModel;
     public $kelasModel;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->userModel = new UserModel();
         $this->kelasModel = new KelasModel();
     }
@@ -22,6 +23,42 @@ class UserController extends BaseController
             'users' => $this->userModel->getUser(),
         ];
         return view('list_user', $data);
+    }
+    public function profile($nama = "", $kelas = "", $npm = "")
+    {
+        $data = [
+            'nama' => $nama,
+            'kelas' => $kelas,
+            'npm' => $npm,
+        ];
+        return view('profile', $data);
+    }
+    public function create()
+    {
+        // $kelas = [
+        //     [
+        //         'id' => 1,
+        //         'nama_kelas' => 'A'
+        //     ],
+        //     [
+        //         'id' => 2,
+        //         'nama_kelas' => 'B'
+        //     ],
+        //     [
+        //         'id' => 3,
+        //         'nama_kelas' => 'C'
+        //     ],
+        //     [
+        //         'id' => 4,
+        //         'nama_kelas' => 'D'
+        //     ],
+        // ];
+        $kelas = $this->kelasModel->getKelas();
+        $data  = [
+            'title' => 'Create User',
+            'kelas' => $kelas,
+            'validation' => \Config\Services::validation()
+        ];
     }
     public function create()
     {
@@ -53,12 +90,27 @@ class UserController extends BaseController
         'validation' => \Config\Services::validation()
 
     ];
-
         return view('create_user', $data);
+    }
+    public function show($id)
+    {
+        $user = $this->userModel->getUser($id);
+
+        $data = [
+            'title' => 'Profile',
+            'user' => $user,
+        ];
+        return view('profile', $data);
     }
     public function store()
     {
-                if (!$this->validate([
+        $path = 'assets/uploads/img/';
+        $foto = $this->request->getFile('foto');
+        $name = $foto->getRandomName();
+        if ($foto->move($path, $name)) {
+            $foto = base_url($path . $name);
+        }
+        if (!$this->validate([
             'nama' => [
                 'rules' => 'required',
                 'errors' => [
@@ -81,13 +133,16 @@ class UserController extends BaseController
             'nama' => $this->request->getVar('nama'),
             'id_kelas' => $this->request->getVar('kelas'),
             'npm' => $this->request->getVar('npm'),
+            'foto' => $foto
         ]);
-
-        $data = [
-            'nama' => $this->request->getVar('nama'),
-            'kelas' => $this->request->getVar('kelas'),
-            'npm' => $this->request->getVar('npm'),
-        ];
-        return view('profile', $data);
+        // dd($this->request->getVar());
+        // $data = [
+        //     'title' => 'Profile',
+        //     'nama' => $this->request->getVar('nama'),
+        //     'kelas' => $this->request->getVar('kelas'),
+        //     'npm' => $this->request->getVar('npm'),
+        // ];
+        // return view('profile', $data);
+        return redirect()->to(base_url('/user'));
     }
 }
