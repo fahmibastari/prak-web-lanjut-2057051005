@@ -4,7 +4,8 @@
 <div class="container">
   <div class="row">
     <h3 class="mt-5">Tabel User</h3>
-    <table class="table table-striped">
+    <a href="<?= base_url('user/create')?>" class="btn btn-primary col-2">Tambah Data</a>
+    <table class="table table-striped py-2">
       <thead>
         <tr>
           <td>No</td>
@@ -23,12 +24,16 @@
             <td><?= $user['nama'] ?></td>
             <td><?= $user['npm'] ?></td>
             <td><?= $user['nama_kelas'] ?></td>
-            <td>
-              <a class="btn btn-primary" href="">Detail</a>
-              <a class="btn btn-warning" href="">Edit</a>
-              <a class="btn btn-danger" href="">Hapus</a>
-
+            <td style="display: flex;">
+              <a class="btn btn-primary" style="width: 80px; height: 40px; margin-right: 10px;" href="<?= base_url('user/' . $user['id']) ?>">Detail</a>
+              <a class="btn btn-warning" style="width: 80px; height: 40px; margin-right: 10px;" href="<?= base_url('user/' . $user['id']. '/edit') ?>">Edit</a>
+              <form action="<?=base_url('user/' . $user['id'])?>" method="POST">
+                <input type="hidden" name="_method" value="DELETE">
+                <?= csrf_field() ?>
+                <input type="submit" class="btn btn-danger" value="Delete" style="width: 80px; height: 40px;">
+              </form>
             </td>
+            
           </tr>
         <?php }
         ?>
