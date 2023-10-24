@@ -9,19 +9,19 @@ class KelasSeeder extends Seeder
 {
     public function run()
     {
-       $KelasModel = new KelasModel();
+        $kelasModel = new KelasModel();
 
-       $KelasModel->save ([
+        $kelasModel->save([
             'nama_kelas' => 'A'
-       ]);
-       $KelasModel->save ([
+        ]);
+        $kelasModel->save([
             'nama_kelas' => 'B'
-       ]);
-       $KelasModel->save ([
+        ]);
+        $kelasModel->save([
             'nama_kelas' => 'C'
-       ]);
-       $KelasModel->save ([
+        ]);
+        $kelasModel->save([
             'nama_kelas' => 'D'
-       ]);
+        ]);
     }
 }

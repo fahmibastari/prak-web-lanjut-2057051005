@@ -1,6 +1,5 @@
 <?= $this->extend('layouts/app') ?>
 <?= $this->section('content') ?>
-<center>
 <main class="form-signin w-100 m-auto">
   <form method="POST" action="<?= base_url('/user/store') ?>" enctype="multipart/form-data">
     <h1 class="h3 mt-5 mb-3 fw-normal">DAFTAR AKUN</h1>
@@ -23,20 +22,18 @@
         </div>
       <?php endif; ?>
     </div>
-    <div class="form-floating">
-      <select class="form-select mt-2" aria-label="Default select example" name="kelas">
-        <option value="" selected disabled>Pilih Kelas</option>
-        <?php
-        foreach ($kelas as $item) {
-        ?>
-          <option value="<?= $item['id'] ?>"><?= $item['nama_kelas'] ?></option>
-        <?php } ?>
-      </select>
-    </div>
+    <select class="form-select mt-2" aria-label="Default select example" name="kelas">
+      <option value="" selected disabled>Pilih Kelas</option>
+      <?php
+      foreach ($kelas as $item) {
+      ?>
+        <option value="<?= $item['id'] ?>"><?= $item['nama_kelas'] ?></option>
+      <?php } ?>
+    </select>
     <div class="form-floating">
       <div class="">
-        <label for="formFileSm" class="form-label">Foto</label>
-        <input class="form-control form-control-sm" id="formFileSm" type="file" name="foto">
+        <label for="formFile" class="form-label">Foto Mahasiswa</label>
+        <input class="form-control form-control-sm" id="formFile" type="file" name="foto">
       </div>
     </div>
 
@@ -44,5 +41,4 @@
     <button class="btn btn-primary w-100 py-2 mt-3" type="submit">REGISTER</button>
   </form>
 </main>
-</center>
 <?= $this->endSection('content') ?>
