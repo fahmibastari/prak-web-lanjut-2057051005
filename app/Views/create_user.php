@@ -1,5 +1,6 @@
 <?= $this->extend('layouts/app') ?>
 <?= $this->section('content') ?>
+
 <center>
 <main class="form-signin w-100 m-auto">
   <form method="POST" action="<?= base_url('/user/store') ?>" enctype="multipart/form-data">

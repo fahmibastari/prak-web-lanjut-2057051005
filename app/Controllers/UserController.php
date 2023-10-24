@@ -136,6 +136,16 @@ class UserController extends BaseController
         return redirect()->to(base_url('/user'))
             ->with('success', 'Berhasil menghapus data!');
     }
+    public function show($id)
+    {
+        $user = $this->userModel->getUser($id);
+
+        $data = [
+            'title' => 'Profile',
+            'user' => $user,
+        ];
+        return view('profile', $data);
+    }
     public function store()
     {
         $path = 'assets/uploads/img/';
