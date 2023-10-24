@@ -59,38 +59,82 @@ class UserController extends BaseController
             'kelas' => $kelas,
             'validation' => \Config\Services::validation()
         ];
-    }
-    public function create()
-    {
-    //     $kelas = [
-    //     [
-    //         'id' => 1,
-    //         'nama_kelas' => 'A'
-    //     ],
-    //     [
-    //         'id' => 2,
-    //         'nama_kelas' => 'B'
-    //     ],
-    //     [
-    //         'id' => 3,
-    //         'nama_kelas' => 'C'
-    //     ],
-    //     [
-    //         'id' => 4,
-    //         'nama_kelas' => 'D'
-    //     ],
-    // ];
-    
-
-    $kelas = $this->kelasModel->getKelas();
-
-    $data = [
-        'title' => 'create user',
-        'kelas' => $kelas,
-        'validation' => \Config\Services::validation()
-
-    ];
         return view('create_user', $data);
+    }
+    public function show($id)
+    {
+        $user = $this->userModel->getUser($id);
+
+        $data = [
+            'title' => 'Profile',
+            'user' => $user,
+        ];
+        return view('profile', $data);
+    }
+    public function edit($id)
+    {
+        $user = $this->userModel->getUser($id);
+        $kelas = $this->kelasModel->getKelas();
+        $data = [
+            'title' => 'Edit User',
+            'user' => $user,
+            'kelas' => $kelas,
+            'validation' => \Config\Services::validation()
+
+        ];
+        return view('edit_user', $data);
+    }
+    public function update($id)
+    {
+        if (!$this->validate([
+            'nama' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} mahasiswa harus di isi.'
+                ]
+            ],
+            'npm' => [
+                'rules' => 'required|max_length[10]',
+                'errors' => [
+                    'required' => '{field} mahasiswa harus di isi.',
+                    'max_length[10]' => '{field} mahasiswa maksimal 10.'
+                ]
+            ]
+        ])) {
+            $validation = \Config\Services::validation();
+            return redirect()->to(base_url('/user/' . $id . '/edit'))->withInput()->with('validation', $validation);
+        }
+        $path = 'assets/uploads/img/';
+        $foto = $this->request->getFile('foto');
+        $data = [
+            'nama' => $this->request->getVar('nama'),
+            'id_kelas' => $this->request->getVar('kelas'),
+            'npm' => $this->request->getVar('npm'),
+        ];
+        if ($foto->isValid()) {
+            $name = $foto->getRandomName();
+            if ($foto->move($path, $name)) {
+                $foto_path = base_url($path . $name);
+                $data['foto'] = $foto_path;
+            }
+        }
+        $result = $this->userModel->updateUser($data, $id);
+
+        if (!$result) {
+            return redirect()->back()->withInput()
+                ->with('error', 'Gagal mengubah data');
+        }
+
+        return redirect()->to(base_url('/user'));
+    }
+    public function destroy($id)
+    {
+        $result = $this->userModel->deleteUser($id);
+        if (!$result) {
+            return redirect()->back()->with('error', 'Gagal menghapus data');
+        }
+        return redirect()->to(base_url('/user'))
+            ->with('success', 'Berhasil menghapus data!');
     }
     public function show($id)
     {
