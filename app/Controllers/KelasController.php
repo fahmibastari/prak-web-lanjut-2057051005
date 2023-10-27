@@ -16,7 +16,7 @@ class KelasController extends BaseController
     {
         $data = [
             'title' => 'List Kelas',
-            'kelas' => $th is->kelasModel->getKelas(),
+            'kelas' => $this->kelasModel->getKelas(),
         ];
         return view('list_kelas', $data);
     }

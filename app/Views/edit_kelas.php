@@ -2,7 +2,7 @@
 <?= $this->section('content') ?>
 <main class="form-signin w-100 m-auto">
   <form method="POST" action="<?= base_url('/kelas/' . $kelas['id']) ?>" enctype="multipart/form-data">
-    <h1 class="h3 mt-5 mb-3 fw-normal">Let's edit the class!</h1>
+    <h1 class="h3 mt-5 mb-3 fw-normal">EDIT KELAZZ</h1>
     <div class="form-floating">
       <input type="text" class="form-control mt-2 <?= session('validation') && session('validation')->hasError('nama_kelas') ? 'is-invalid' : '' ?>" id="floatingName" placeholder="Nama Kelas" name="nama_kelas" value="<?= $kelas['nama_kelas'] ?>">
       <label for="floatingName">Nama Kelas</label>
@@ -24,7 +24,7 @@
     </div>
     <input type="hidden" name="_method" value="PUT">
     <?= csrf_field() ?>
-    <button class="btn btn-primary w-100 py-2 mt-3" type="submit">Insert it</button>
+    <button class="btn btn-primary w-100 py-2 mt-3" type="submit">EDIT</button>
   </form>
 </main>
 <?= $this->endSection('content') ?>

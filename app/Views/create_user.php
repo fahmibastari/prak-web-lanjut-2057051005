@@ -1,11 +1,13 @@
 <?= $this->extend('layouts/app') ?>
 <?= $this->section('content') ?>
-<main class="form-signin w-100 m-auto">
+<link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>">
+<center>
+<main class="form-signin w-1000 m-1000">
   <form method="POST" action="<?= base_url('/user/store') ?>" enctype="multipart/form-data">
-    <h1 class="h3 mt-5 mb-3 fw-normal">Let's sign up</h1>
+    <h1 class="h1 mt-5 mb-3 fw-normal">DAFTAR AKUN</h1>
     <div class="form-floating">
       <input type="text" class="form-control mt-2 <?= session('validation') && session('validation')->hasError('nama') ? 'is-invalid' : '' ?>" id="floatingName" placeholder="Nama" name="nama" value="<?= old('nama') ?>">
-      <label for="floatingName">Nama</label>
+      <label for="floatingName">Masukkan Nama</label>
       <?php if (session('validation') && session('validation')->hasError('nama')) : ?>
         <div class="invalid-feedback">
           <?= session('validation')->getError('nama'); ?>
@@ -15,7 +17,7 @@
     </div>
     <div class="form-floating">
       <input type="number" class="form-control mt-2 <?= session('validation') ? 'is-invalid' : '' ?>" id="floatingNpm" placeholder="NPM" name="npm" value="<?= old('npm') ?>">
-      <label for="floatingNpm">NPM</label>
+      <label for="floatingNpm">Masukkan NPM</label>
       <?php if (session('validation') && session('validation')->hasError('npm')) : ?>
         <div class="invalid-feedback">
           <?= session('validation')->getError('npm'); ?>
@@ -23,7 +25,7 @@
       <?php endif; ?>
     </div>
     <select class="form-select mt-2" aria-label="Default select example" name="kelas">
-      <option value="" selected disabled>Pilih Kelas</option>
+      <option value="" selected disabled>Kelas</option>
       <?php
       foreach ($kelas as $item) {
       ?>
@@ -32,13 +34,14 @@
     </select>
     <div class="form-floating">
       <div class="">
-        <label for="formFile" class="form-label">Foto Mahasiswa</label>
+        <label for="formFile" class="form-label">Tambahkan Foto</label>
         <input class="form-control form-control-sm" id="formFile" type="file" name="foto">
       </div>
     </div>
 
 
-    <button class="btn btn-primary w-100 py-2 mt-3" type="submit">Insert it</button>
+    <button class="btn btn-primary w-100 py-2 mt-3 color-background: red" >DAFTAR</button>
   </form>
 </main>
+</center>
 <?= $this->endSection('content') ?>
